@@ -16,7 +16,7 @@ namespace Uebung03_GenerateAccountData
 
     class Account
     {
-        Random rnd = new Random();
+        Random rnd;
         private string[] Brigades_ANI = { "Flyingdragon", "Bulletproof", "BlackEagles", "StarshipTrooper", "ANIsBADBOYs", "Escalation", "StarWarsFighters", "crazy", "xSOULxHUNTERx", "cimbom" };
         private string[] Brigades_BCU = { "2Stoned", "EliteHeroes", "CST", "RapidScout", "FIXundFERTIG", "TheBrothersOfDeath", "Werwölfe", "TurtlePower", "Lantianer", "InFamous" };
 
@@ -213,8 +213,9 @@ namespace Uebung03_GenerateAccountData
             UnusedStatpoints = unusedStatpoints;
         }
 
-        public Account(DateTime registrationDate)
+        public Account(DateTime registrationDate, Random rnd)
         {
+            this.rnd = rnd;
             RegistrationDate = GetRandomRegistrationTime(registrationDate);
             LastLoginDate = GetRandomLastLoginTime(registrationDate);
             Nation = GetRandomNation();
@@ -225,10 +226,10 @@ namespace Uebung03_GenerateAccountData
             Credits = rnd.Next(1000000000);
             Fame = rnd.Next(50000);
             SetRandomStats();
-            Brigade = GetRandomBriage();
+            Brigade = GetRandomBrigade();
         }
 
-        private string GetRandomBriage()
+        private string GetRandomBrigade()
         {
             return (Nation.Equals("ANI")) ? Brigades_ANI[rnd.Next(Brigades_ANI.Length)] : Brigades_BCU[rnd.Next(Brigades_BCU.Length)];
         }
@@ -250,22 +251,61 @@ namespace Uebung03_GenerateAccountData
                         rndStat = rnd.NextDouble() * 100;
                         if (rndStat <= 58.05d)
                         {
-                            Attack += 4;
+                            if (Attack < 340)
+                            {
+                                Attack += 4;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         } else if (rndStat > 58.05d && rndStat <= 86.0d)
                         {
-                            Defence += 3;
+                            if (Defence < 340)
+                            {
+                                Defence += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         } else if (rndStat > 86.0d && rndStat <= 86.7d)
                         {
-                            Evasion += 1;
+                            if (Evasion < 340)
+                            {
+                                Evasion += 1;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         } else if (rndStat > 86.7d && rndStat <= 91.6d)
                         {
-                            Fuel += 3;
+                            if (Fuel < 340)
+                            {
+                                Fuel += 3;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         } else if (rndStat > 91.6d && rndStat <= 95.8d)
                         {
-                            Spirit += 3;
+                            if (Spirit < 340)
+                            {
+                                Spirit += 3;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         } else if (rndStat > 95.8d)
                         {
-                            Shield += 4;
+                            if (Shield < 340)
+                            {
+                                Shield += 4;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                     }
                     break;
@@ -281,27 +321,63 @@ namespace Uebung03_GenerateAccountData
                         rndStat = rnd.NextDouble() * 100;
                         if (rndStat <= 58.9d)
                         {
-                            Attack += 3;
+                            if (Attack < 340)
+                            {
+                                Attack += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 58.9d && rndStat <= 78.75d)
                         {
-                            Defence += 3;
+                            if (Defence < 340)
+                            {
+                                Defence += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 78.75d && rndStat <= 89.7d)
                         {
-                            Evasion += 3;
+                            if (Evasion < 340)
+                            {
+                                Evasion += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 89.7d && rndStat <= 93.8d)
                         {
-                            Fuel += 3;
+                            if (Fuel < 340)
+                            {
+                                Fuel += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 93.8d && rndStat <= 99.3d)
                         {
-                            Spirit += 3;
+                            if (Spirit < 340)
+                            {
+                                Spirit += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 99.3d)
                         {
-                            Shield += 3;
+                            if (Shield < 340)
+                            {
+                                Shield += 3;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                     }
                     break;
@@ -317,27 +393,67 @@ namespace Uebung03_GenerateAccountData
                         rndStat = rnd.NextDouble() * 100;
                         if (rndStat <= 54.15d)
                         {
-                            Attack += 4;
+                            if (Attack < 340)
+                            {
+                                Attack += 4;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 54.15d && rndStat <= 54.9d)
                         {
-                            Defence += 2;
+                            if (Defence < 340)
+                            {
+                                Defence += 2;
+                            } else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 54.9d && rndStat <= 96.25d)
                         {
-                            Evasion += 4;
+                            if (Evasion < 340)
+                            {
+                                Evasion += 4;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 96.25d && rndStat <= 98.5d)
                         {
-                            Fuel += 3;
+                            if (Fuel < 340)
+                            {
+                                Fuel += 3;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 98.5d && rndStat <= 99.25d)
                         {
-                            Spirit += 3;
+                            if (Spirit < 340)
+                            {
+                                Spirit += 3;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 99.25d)
                         {
-                            Shield += 2;
+                            if (Shield < 340)
+                            {
+                                Shield += 2;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                     }
                     break;
@@ -353,27 +469,69 @@ namespace Uebung03_GenerateAccountData
                         rndStat = rnd.NextDouble() * 100;
                         if (rndStat <= 7.2d)
                         {
-                            Attack += 3;
+                            if (Attack < 340)
+                            {
+                                Attack += 2;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 7.2d && rndStat <= 62.6d)
                         {
-                            Defence += 3;
+                            if (Defence < 340)
+                            {
+                                Defence += 4;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 62.6d && rndStat <= 63.3d)
                         {
-                            Evasion += 3;
+                            if (Evasion < 340)
+                            {
+                                Evasion += 2;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 63.3d && rndStat <= 70.5d)
                         {
-                            Fuel += 3;
+                            if (Fuel < 340)
+                            {
+                                Fuel += 3;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 70.5d && rndStat <= 91.35d)
                         {
-                            Spirit += 3;
+                            if (Spirit < 340)
+                            {
+                                Spirit += 4;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                         else if (rndStat > 91.35d)
                         {
-                            Shield += 3;
+                            if (Shield < 340)
+                            {
+                                Shield += 3;
+                            }
+                            else
+                            {
+                                UnusedStatpoints++;
+                            }
                         }
                     }
                     break;

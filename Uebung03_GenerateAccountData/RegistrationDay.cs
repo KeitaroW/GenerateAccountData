@@ -73,11 +73,13 @@ namespace Uebung03_GenerateAccountData
             Account temp;
             registrationDate = new DateTime(registrationDate.Year, registrationDate.Month, registrationDate.Day, 0, 0, 0);
             StreamWriter file = new StreamWriter("accounts_" + registrationDate.ToString("yyyyMMdd") + ".txt");
+            if (path != null)
+                file = new StreamWriter(Path.Combine(path, "accounts_" + registrationDate.ToString("yyyyMMdd") + ".txt"));
             file.Write("Id\tLoginname\tPassword\tRegistrationDate\tLastLoginDate\tCharactername\tNation\tGeartype\tLevel\tLevelpercentage\tSpi\tCredits\tFame" + 
                 "\tBrigade\tAttack\tDefence\tEvasion\tFuel\tSpirit\tShield\tUnusedStatpoints\n");
             for (int i = index * rows; i < (index+1) * rows; i++)
             {
-                temp = new Account(registrationDate);
+                temp = new Account(registrationDate, rnd);
                 var testUsers = new Faker<User>()
                     //Optional: Call for objects that have complex initialization
                     .CustomInstantiator(f => new User(i))
