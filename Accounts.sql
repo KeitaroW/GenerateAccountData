@@ -11,11 +11,11 @@ DROP TABLE [dbo].[Accounts]
 
 CREATE TABLE [dbo].[Accounts](
 	[Id] [int] NOT NULL,
-	[Loginname] [char](20) NOT NULL,
+	[Loginname] [char](30) NOT NULL,
 	[Password] [char](20) NOT NULL,
 	[RegistrationDate] [date] NOT NULL,
 	[LastLoginDate] [date] NOT NULL,
-	[Charactername] [char](20) NOT NULL,
+	[Charactername] [char](30) NOT NULL,
 	[Nation] [char](3) NOT NULL,
 	[Geartype] [char](1) NOT NULL,
 	[Level] [int] NOT NULL,

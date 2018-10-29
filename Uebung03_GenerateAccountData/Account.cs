@@ -17,6 +17,8 @@ namespace Uebung03_GenerateAccountData
     class Account
     {
         Random rnd = new Random();
+        private string[] Brigades_ANI = { "Flyingdragon", "Bulletproof", "BlackEagles", "StarshipTrooper", "ANIsBADBOYs", "Escalation", "StarWarsFighters", "crazy", "xSOULxHUNTERx", "cimbom" };
+        private string[] Brigades_BCU = { "2Stoned", "EliteHeroes", "CST", "RapidScout", "FIXundFERTIG", "TheBrothersOfDeath", "Werwölfe", "TurtlePower", "Lantianer", "InFamous" };
 
         private int id;
 
@@ -223,6 +225,12 @@ namespace Uebung03_GenerateAccountData
             Credits = rnd.Next(1000000000);
             Fame = rnd.Next(50000);
             SetRandomStats();
+            Brigade = GetRandomBriage();
+        }
+
+        private string GetRandomBriage()
+        {
+            return (Nation.Equals("ANI")) ? Brigades_ANI[rnd.Next(Brigades_ANI.Length)] : Brigades_BCU[rnd.Next(Brigades_BCU.Length)];
         }
 
         private void SetRandomStats()
@@ -237,7 +245,7 @@ namespace Uebung03_GenerateAccountData
                     Fuel = 3;
                     Spirit = 3;
                     Shield = 4;
-                    for (int i = UnusedStatpoints; UnusedStatpoints >= 0; i--)
+                    for (UnusedStatpoints = (short)(Level * 1.33); UnusedStatpoints > 0; UnusedStatpoints--)
                     {
                         rndStat = rnd.NextDouble() * 100;
                         if (rndStat <= 58.05d)
@@ -268,6 +276,34 @@ namespace Uebung03_GenerateAccountData
                     Fuel = 3;
                     Spirit = 3;
                     Shield = 3;
+                    for (UnusedStatpoints = (short)(Level * 1.33); UnusedStatpoints > 0; UnusedStatpoints--)
+                    {
+                        rndStat = rnd.NextDouble() * 100;
+                        if (rndStat <= 58.9d)
+                        {
+                            Attack += 3;
+                        }
+                        else if (rndStat > 58.9d && rndStat <= 78.75d)
+                        {
+                            Defence += 3;
+                        }
+                        else if (rndStat > 78.75d && rndStat <= 89.7d)
+                        {
+                            Evasion += 3;
+                        }
+                        else if (rndStat > 89.7d && rndStat <= 93.8d)
+                        {
+                            Fuel += 3;
+                        }
+                        else if (rndStat > 93.8d && rndStat <= 99.3d)
+                        {
+                            Spirit += 3;
+                        }
+                        else if (rndStat > 99.3d)
+                        {
+                            Shield += 3;
+                        }
+                    }
                     break;
                 case Geartype.I:
                     Attack = 4;
@@ -276,6 +312,34 @@ namespace Uebung03_GenerateAccountData
                     Fuel = 3;
                     Spirit = 3;
                     Shield = 2;
+                    for (UnusedStatpoints = (short)(Level * 1.33); UnusedStatpoints > 0; UnusedStatpoints--)
+                    {
+                        rndStat = rnd.NextDouble() * 100;
+                        if (rndStat <= 54.15d)
+                        {
+                            Attack += 4;
+                        }
+                        else if (rndStat > 54.15d && rndStat <= 54.9d)
+                        {
+                            Defence += 2;
+                        }
+                        else if (rndStat > 54.9d && rndStat <= 96.25d)
+                        {
+                            Evasion += 4;
+                        }
+                        else if (rndStat > 96.25d && rndStat <= 98.5d)
+                        {
+                            Fuel += 3;
+                        }
+                        else if (rndStat > 98.5d && rndStat <= 99.25d)
+                        {
+                            Spirit += 3;
+                        }
+                        else if (rndStat > 99.25d)
+                        {
+                            Shield += 2;
+                        }
+                    }
                     break;
                 case Geartype.M:
                     Attack = 2;
@@ -284,25 +348,47 @@ namespace Uebung03_GenerateAccountData
                     Fuel = 3;
                     Spirit = 4;
                     Shield = 3;
+                    for (UnusedStatpoints = (short)(Level * 1.33); UnusedStatpoints > 0; UnusedStatpoints--)
+                    {
+                        rndStat = rnd.NextDouble() * 100;
+                        if (rndStat <= 7.2d)
+                        {
+                            Attack += 3;
+                        }
+                        else if (rndStat > 7.2d && rndStat <= 62.6d)
+                        {
+                            Defence += 3;
+                        }
+                        else if (rndStat > 62.6d && rndStat <= 63.3d)
+                        {
+                            Evasion += 3;
+                        }
+                        else if (rndStat > 63.3d && rndStat <= 70.5d)
+                        {
+                            Fuel += 3;
+                        }
+                        else if (rndStat > 70.5d && rndStat <= 91.35d)
+                        {
+                            Spirit += 3;
+                        }
+                        else if (rndStat > 91.35d)
+                        {
+                            Shield += 3;
+                        }
+                    }
                     break;
             }
         }
 
         private DateTime GetRandomRegistrationTime(DateTime registrationDate)
         {
-            registrationDate.AddHours(rnd.Next(23));
-            registrationDate.AddMinutes(rnd.Next(59));
-            registrationDate.AddSeconds(rnd.Next(59));
+            registrationDate = registrationDate.AddHours(rnd.Next(23)).AddMinutes(rnd.Next(59)).AddSeconds(rnd.Next(59));
             return registrationDate;
         }
 
         private DateTime GetRandomLastLoginTime(DateTime registrationDate)
         {
-            registrationDate.AddMonths(rnd.Next(12));
-            registrationDate.AddDays(rnd.Next(31));
-            registrationDate.AddHours(rnd.Next(23));
-            registrationDate.AddMinutes(rnd.Next(59));
-            registrationDate.AddSeconds(rnd.Next(59));
+            registrationDate = registrationDate.AddMonths(rnd.Next(12)).AddDays(rnd.Next(31)).AddHours(rnd.Next(23)).AddMinutes(rnd.Next(59)).AddSeconds(rnd.Next(59));
             return registrationDate;
         }
 

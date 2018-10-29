@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,6 +69,9 @@ namespace Uebung03_GenerateAccountData
             List<Account> accounts = new List<Account>();
             Account temp;
             registrationDate = new DateTime(registrationDate.Year, registrationDate.Month, registrationDate.Day, 0, 0, 0);
+            StreamWriter file = new StreamWriter("accounts_" + registrationDate.ToString("yyyyMMdd") + ".txt");
+            file.Write("Id\tLoginname\tPassword\tRegistrationDate\tLastLoginDate\tCharactername\tNation\tGeartype\tLevel\tLevelpercentage\tSpi\tCredits\tFame" + 
+                "\tBrigade\tAttack\tDefence\tEvasion\tFuel\tSpirit\tShield\tUnusedStatpoints\n");
             for (int i = index * rows; i < (index+1) * rows; i++)
             {
                 temp = new Account(registrationDate);
@@ -89,7 +93,21 @@ namespace Uebung03_GenerateAccountData
 
                 var user = testUsers.Generate();
                 Console.WriteLine(user);
-                
+                temp.Loginname = user.Loginname;
+                temp.Password = user.Password;
+                temp.CharacterName = user.Loginname;
+                accounts.Add(temp);
+            }
+            accounts.Sort((x, y) => DateTime.Compare(x.RegistrationDate, y.RegistrationDate));
+            int id = index * rows;
+            foreach (Account account in accounts)
+            {
+                account.Id = id;
+                file.Write(account.Id + "\t" + account.Loginname + "\t" + account.Password + "\t" + account.RegistrationDate.ToString("yyyyMMddHHmmss") + "\t" + account.LastLoginDate.ToString("yyyyMMddHHmmss") + "\t" + 
+                    account.CharacterName + "\t" + account.Nation + "\t " + account.Geartype + "\t" + account.Level + "\t" + account.Levelpercentage.ToString("0.##") + "\t" + account.Spi + 
+                    "\t" + account.Credits + "\t" + account.Fame + "\t" + account.Brigade + "\t" + account.Attack + "\t" + account.Defence + "\t" + account.Evasion + "\t" + 
+                    account.Fuel + "\t" + account.Spirit + "\t" + account.Shield + "\t" + account.UnusedStatpoints + "\n");
+                id++;
             }
         }
     }
