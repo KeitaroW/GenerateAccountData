@@ -47,21 +47,24 @@ namespace Uebung03_GenerateAccountData
         int rows;
         int index;
         DateTime registrationDate;
+        Random rnd;
         string path;
 
-        public RegistrationDay(int rows, int index, DateTime registrationDate)
+        public RegistrationDay(int rows, int index, DateTime registrationDate, Random rnd)
         {
             this.rows = rows;
             this.index = index;
             this.registrationDate = registrationDate;
+            this.rnd = rnd;
         }
 
-        public RegistrationDay(int rows, int index, DateTime registrationDate, string path)
+        public RegistrationDay(int rows, int index, DateTime registrationDate, Random rnd, string path)
         {
             this.rows = rows;
             this.index = index;
             this.registrationDate = registrationDate;
             this.path = path;
+            this.rnd = rnd;
         }
 
         public void GenerateAccountData()
@@ -103,7 +106,7 @@ namespace Uebung03_GenerateAccountData
             foreach (Account account in accounts)
             {
                 account.Id = id;
-                file.Write(account.Id + "\t" + account.Loginname + "\t" + account.Password + "\t" + account.RegistrationDate.ToString("yyyyMMddHHmmss") + "\t" + account.LastLoginDate.ToString("yyyyMMddHHmmss") + "\t" + 
+                file.Write(account.Id + "\t" + account.Loginname + "\t" + account.Password + "\t" + account.RegistrationDate.ToString("yyyy-MM-dd hh:mm:ss.fff") + "\t" + account.LastLoginDate.ToString(/*"yyyyMMddHHmmss" yyyy-MM-dd hh:mm:ss.fff yyyy-MM-ddTHH:mm:ss*/"yyyy-MM-dd hh:mm:ss.fff") + "\t" + 
                     account.CharacterName + "\t" + account.Nation + "\t " + account.Geartype + "\t" + account.Level + "\t" + account.Levelpercentage.ToString("0.##") + "\t" + account.Spi + 
                     "\t" + account.Credits + "\t" + account.Fame + "\t" + account.Brigade + "\t" + account.Attack + "\t" + account.Defence + "\t" + account.Evasion + "\t" + 
                     account.Fuel + "\t" + account.Spirit + "\t" + account.Shield + "\t" + account.UnusedStatpoints + "\n");

@@ -10,7 +10,8 @@ namespace Uebung03_GenerateAccountData
     {
         static void Main(string[] args)
         {
-            RegistrationDay day = new RegistrationDay(7500, 0, DateTime.Now.Date);
+            Random rnd = new Random();
+            RegistrationDay day = new RegistrationDay(7500, 0, DateTime.Now.Date, rnd);
             day.GenerateAccountData();
             Console.Read();
         }
