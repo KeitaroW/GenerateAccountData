@@ -8,7 +8,7 @@ namespace Uebung03_GenerateAccountData
 {
     class GenerateAccountData
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             if (args.Length == 5)
             {
