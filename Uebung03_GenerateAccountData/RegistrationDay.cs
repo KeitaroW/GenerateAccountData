@@ -114,6 +114,7 @@ namespace Uebung03_GenerateAccountData
                     account.Fuel + "\t" + account.Spirit + "\t" + account.Shield + "\t" + account.UnusedStatpoints + "\n");
                 id++;
             }
+            file.Close();
         }
     }
 }
