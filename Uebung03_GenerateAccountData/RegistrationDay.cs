@@ -69,6 +69,10 @@ namespace Uebung03_GenerateAccountData
 
         public void GenerateAccountData()
         {
+            /*Account accMin = new Account(registrationDate, rnd);
+            Account accMax = new Account(registrationDate, rnd);
+            double min = Double.MaxValue;
+            double max = Double.MinValue;*/
             List<Account> accounts = new List<Account>();
             Account temp;
             registrationDate = new DateTime(registrationDate.Year, registrationDate.Month, registrationDate.Day, 0, 0, 0);
@@ -93,7 +97,7 @@ namespace Uebung03_GenerateAccountData
                     //Optional: After all rules are applied finish with the following action
                     .FinishWith((f, u) =>
                     {
-                        Console.WriteLine("User Created! Id={0}", u.UserId);
+                        //Console.WriteLine("User Created! Id={0}", u.UserId);
                     });
 
                 var user = testUsers.Generate();
@@ -103,11 +107,22 @@ namespace Uebung03_GenerateAccountData
                 temp.CharacterName = user.Loginname;
                 accounts.Add(temp);
             }
+            Console.WriteLine("File: " + (index+1));
             accounts.Sort((x, y) => DateTime.Compare(x.RegistrationDate, y.RegistrationDate));
             int id = index * rows;
             foreach (Account account in accounts)
             {
                 account.Id = id;
+                /*if (account.Levelpercentage > max)
+                {
+                    max = account.Levelpercentage;
+                    accMax = account;
+                }
+                if (account.Levelpercentage < min)
+                {
+                    min = account.Levelpercentage;
+                    accMin = account;
+                }*/
                 file.Write(account.Id + "\t" + account.Loginname + "\t" + account.Password + "\t" + account.RegistrationDate.ToString("yyyy-MM-dd hh:mm:ss.fff") + "\t" + account.LastLoginDate.ToString(/*"yyyyMMddHHmmss" yyyy-MM-dd hh:mm:ss.fff yyyy-MM-ddTHH:mm:ss*/"yyyy-MM-dd hh:mm:ss.fff") + "\t" + 
                     account.CharacterName + "\t" + account.Nation + "\t" + account.Geartype + "\t" + account.Level + "\t" + account.Levelpercentage.ToString("0.##") + "\t" + account.Spi + 
                     "\t" + account.Credits + "\t" + account.Fame + "\t" + account.Brigade + "\t" + account.Attack + "\t" + account.Defence + "\t" + account.Evasion + "\t" + 
@@ -115,6 +130,8 @@ namespace Uebung03_GenerateAccountData
                 id++;
             }
             file.Close();
+            /*Console.WriteLine("Id: " + accMin.Id + " Min: " + min.ToString("0.##"));
+            Console.WriteLine("Id: " + accMax.Id + " Max: " + max.ToString("0.##"));*/
         }
     }
 }

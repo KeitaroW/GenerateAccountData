@@ -221,7 +221,7 @@ namespace Uebung03_GenerateAccountData
             Nation = GetRandomNation();
             Geartype = (Geartype)rnd.Next(4);
             Level = rnd.Next(1, 116);
-            Levelpercentage = rnd.NextDouble() * 100;
+            Levelpercentage = rnd.NextDouble() * 99.99d;
             Spi = rnd.Next(Int32.MaxValue);
             Credits = rnd.Next(1000000000);
             Fame = rnd.Next(50000);
