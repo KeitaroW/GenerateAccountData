@@ -69,10 +69,12 @@ namespace Uebung03_GenerateAccountData
 
         public void GenerateAccountData()
         {
-            /*Account accMin = new Account(registrationDate, rnd);
+            #if DEBUG
+            Account accMin = new Account(registrationDate, rnd);
             Account accMax = new Account(registrationDate, rnd);
             double min = Double.MaxValue;
-            double max = Double.MinValue;*/
+            double max = Double.MinValue;
+            #endif
             List<Account> accounts = new List<Account>();
             Account temp;
             registrationDate = new DateTime(registrationDate.Year, registrationDate.Month, registrationDate.Day, 0, 0, 0);
@@ -100,11 +102,13 @@ namespace Uebung03_GenerateAccountData
                     .RuleFor(u => u.Loginname, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))
                     .RuleFor(u => u.Password, (f, u) => f.Internet.Password())
                     //Optional: After all rules are applied finish with the following action
+                    #if DEBUG
                     .FinishWith((f, u) =>
                     {
-                        //Console.WriteLine("User Created! Id={0}", u.UserId);
-                    });
-
+                        Console.WriteLine("User Created! Id={0}", u.UserId);
+                    })
+                    #endif
+                    ;
                 var user = testUsers.Generate();
                 Console.WriteLine(user);
                 temp.Loginname = user.Loginname;
@@ -118,7 +122,8 @@ namespace Uebung03_GenerateAccountData
             foreach (Account account in accounts)
             {
                 account.Id = id;
-                /*if (account.Levelpercentage > max)
+                #if DEBUG
+                if (account.Levelpercentage > max)
                 {
                     max = account.Levelpercentage;
                     accMax = account;
@@ -127,7 +132,8 @@ namespace Uebung03_GenerateAccountData
                 {
                     min = account.Levelpercentage;
                     accMin = account;
-                }*/
+                }
+                #endif
                 file.Write(account.Id + "\t" + account.Loginname + "\t" + account.Password + "\t" + account.RegistrationDate.ToString("yyyy-MM-dd hh:mm:ss.fff") + "\t" + account.LastLoginDate.ToString(/*"yyyyMMddHHmmss" yyyy-MM-dd hh:mm:ss.fff yyyy-MM-ddTHH:mm:ss*/"yyyy-MM-dd hh:mm:ss.fff") + "\t" + 
                     account.CharacterName + "\t" + account.Nation + "\t" + account.Geartype + "\t" + account.Level + "\t" + account.Levelpercentage.ToString("0.##") + "\t" + account.Spi + 
                     "\t" + account.Credits + "\t" + account.Fame + "\t" + account.Brigade + "\t" + account.Attack + "\t" + account.Defence + "\t" + account.Evasion + "\t" + 
@@ -135,8 +141,10 @@ namespace Uebung03_GenerateAccountData
                 id++;
             }
             file.Close();
-            /*Console.WriteLine("Id: " + accMin.Id + " Min: " + min.ToString("0.##"));
-            Console.WriteLine("Id: " + accMax.Id + " Max: " + max.ToString("0.##"));*/
+            #if DEBUG
+            Console.WriteLine("Id: " + accMin.Id + " Min: " + min.ToString("0.##"));
+            Console.WriteLine("Id: " + accMax.Id + " Max: " + max.ToString("0.##"));
+            #endif
         }
     }
 }
