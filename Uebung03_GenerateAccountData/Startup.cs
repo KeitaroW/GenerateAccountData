@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Additive_Designer_Installer
+namespace Uebung03_GenerateAccountData
 {
     class StartUp
     {
@@ -12,7 +12,7 @@ namespace Additive_Designer_Installer
         {
             AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;
 
-            Uebung03_GenerateAccountData.GenerateAccountData.Main(args); // Run startup code.
+            GenerateAccountData.Main(args); // Run startup code.
         }
 
         private static Assembly OnResolveAssembly(object sender, ResolveEventArgs e)
